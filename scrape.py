@@ -43,9 +43,9 @@ def _normalize_url_data(url_data):
 def _build_session(use_tor=False):
     session = requests.Session()
     retry = Retry(
-        total=3,
-        read=3,
-        connect=3,
+        total=1,
+        read=1,
+        connect=1,
         backoff_factor=0.3,
         status_forcelist=[500, 502, 503, 504],
         allowed_methods=frozenset(["GET", "HEAD"]),
@@ -102,7 +102,7 @@ def scrape_single(url_data, rotate=False, rotate_interval=5, control_port=9051, 
         session = _get_session(use_tor=use_tor)
         if use_tor:
             # Increased timeout for Tor latency
-            response = session.get(url, headers=headers, timeout=(10, 45), stream=True)
+            response = session.get(url, headers=headers, timeout=(10, 25), stream=True)
         else:
             # Fallback for clearweb if needed, though tool focuses on dark web
             response = session.get(url, headers=headers, timeout=(5, 25), stream=True)

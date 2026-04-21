@@ -19,24 +19,24 @@ from config import (
 
 
 class BufferedStreamingHandler(BaseCallbackHandler):
-    def __init__(self, buffer_limit: int = 60, ui_callback: Optional[Callable[[str], None]] = None):
+    def __init__(self, buffer_limit: int = 60, stream_callback: Optional[Callable[[str], None]] = None):
         self.buffer = ""
         self.buffer_limit = buffer_limit
-        self.ui_callback = ui_callback
+        self.stream_callback = stream_callback
 
     def on_llm_new_token(self, token: str, **kwargs) -> None:
         self.buffer += token
         if "\n" in token or len(self.buffer) >= self.buffer_limit:
             print(self.buffer, end="", flush=True)
-            if self.ui_callback:
-                self.ui_callback(self.buffer)
+            if self.stream_callback:
+                self.stream_callback(self.buffer)
             self.buffer = ""
 
     def on_llm_end(self, response, **kwargs) -> None:
         if self.buffer:
             print(self.buffer, end="", flush=True)
-            if self.ui_callback:
-                self.ui_callback(self.buffer)
+            if self.stream_callback:
+                self.stream_callback(self.buffer)
             self.buffer = ""
 
 

@@ -52,10 +52,10 @@ DEFAULT_SEARCH_ENGINES = [e["url"] for e in SEARCH_ENGINES]
 def get_tor_session():
     session = requests.Session()
     retry = Retry(
-        total=5,
-        read=5,
-        connect=5,
-        backoff_factor=1,
+        total=1,
+        read=1,
+        connect=1,
+        backoff_factor=0.5,
         status_forcelist=[429, 500, 502, 503, 504]
     )
     adapter = HTTPAdapter(max_retries=retry)
@@ -74,7 +74,7 @@ def fetch_search_results(endpoint, query, use_tor=True):
     try:
         if use_tor:
             session = get_tor_session()
-            response = session.get(url, headers=headers, timeout=45)
+            response = session.get(url, headers=headers, timeout=15)
         else:
             # Direct request for clearweb fallbacks
             response = requests.get(url, headers=headers, timeout=30)
@@ -106,6 +106,7 @@ def fetch_search_results(endpoint, query, use_tor=True):
             return links
         return []
     except Exception as e:
+        print(f"[!] Engine failed: {endpoint.split('/')[2]}")
         return []
 
 def get_search_results(refined_query, max_workers=5):

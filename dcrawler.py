@@ -2,139 +2,570 @@ import argparse
 import sys
 import os
 from pathlib import Path
+from typing import Optional
 
 # --- Environment Awareness ---
 def ensure_venv():
-    """Ensure the script runs within the project's virtual environment."""
-    # Find the project root (where .venv should be)
     project_root = Path(__file__).parent.resolve()
     venv_path = project_root / ".venv"
     venv_python = venv_path / "bin" / "python3"
-    
-    # If we are already in the venv, or no venv exists, just continue
-    # sys.prefix changes when in a venv
     if sys.prefix == str(venv_path) or not venv_python.exists():
         return
-
-    # If we are NOT in the venv but it exists, re-execute using venv python
-    # Set an env var to avoid infinite recursion if something goes wrong
     if os.environ.get("_DCRAWLER_REEXEC") == "1":
         return
-
     os.environ["_DCRAWLER_REEXEC"] = "1"
     try:
         os.execv(str(venv_python), [str(venv_python)] + sys.argv)
     except Exception:
-        # If execv fails, just continue and hope for the best
         pass
 
-# Only attempt auto-switch if not explicitly disabled
 if os.environ.get("DCRAWLER_NO_VENV") != "1":
     ensure_venv()
 
 try:
     from dotenv import load_dotenv
-    from llm import get_llm, refine_query, filter_results, generate_summary
     from search import get_search_results
     from scrape import scrape_multiple
-    from llm_utils import get_model_choices
+    from storage import (
+        new_session, update_session, get_session,
+        save_results, save_scraped_content, log_event,
+        export_session_json, export_session_csv, export_all_sessions_csv,
+        list_sessions,
+    )
+    from reporter import (
+        generate_text_report, save_text_report,
+        generate_html_report, save_html_report,
+        print_health_report, REPORTS_DIR,
+    )
+    from ioc_extractor import extract_iocs, calculate_threat_score, score_label
 except ImportError as e:
     print(f"\n[!] Missing dependency: {e}")
-    print("[!] Please ensure you are using the virtual environment.")
-    print("[!] Try running: ./entrypoint.sh \"your query\"")
-    print("[!] Or install dependencies: pip install -r requirements.txt")
+    print("[!] Run: pip install -r requirements.txt")
     sys.exit(1)
 
-# Load environment variables from .env
 load_dotenv()
 
-def main():
-    # Fetch available models to show in help or use as default
-    available_models = get_model_choices()
-    default_model = "gpt-4.1" if "gpt-4.1" in available_models else (available_models[0] if available_models else None)
 
-    parser = argparse.ArgumentParser(
-        description="Dcrawler CLI: AI-Powered Dark Web OSINT Tool",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+# ── Raw (no-LLM) mode helpers ────────────────────────────────────────────────
+
+def _raw_links_report(query: str, results: list[dict]) -> str:
+    sep = "=" * 70
+    lines = [
+        sep,
+        "              DCRAWLER – LINKS REPORT (RAW MODE)",
+        sep,
+        f"  Query   : {query}",
+        f"  Total   : {len(results)} unique links",
+        sep, "",
+    ]
+    for i, r in enumerate(results, 1):
+        title = r.get("title", "").strip() or "(no title)"
+        url   = r.get("link", "")
+        lines.append(f"  [{i:>3}]  {title}")
+        lines.append(f"         {url}")
+        lines.append("")
+    lines += [sep, ""]
+    return "\n".join(lines)
+
+
+def _raw_content_report(query: str, scraped: dict[str, str]) -> str:
+    sep = "=" * 70
+    lines = [
+        sep,
+        "            DCRAWLER – CONTENT REPORT (RAW MODE)",
+        sep,
+        f"  Query   : {query}",
+        f"  Pages   : {len(scraped)} scraped",
+        sep,
+    ]
+    for url, content in scraped.items():
+        lines += ["", f"  URL: {url}", "-" * 70, content.strip(), ""]
+    lines += [sep, ""]
+    return "\n".join(lines)
+
+
+def _raw_links_html(query: str, results: list[dict]) -> str:
+    rows = "".join(
+        f"<tr><td>{i}</td>"
+        f"<td><a href='{r.get('link','')}' target='_blank'>"
+        f"{r.get('title','').replace('<','&lt;') or '(no title)'}</a></td>"
+        f"<td class='mono'>{r.get('link','').replace('<','&lt;')}</td></tr>"
+        for i, r in enumerate(results, 1)
     )
-    parser.add_argument("query", help="The dark web search query (e.g., 'ransomware leaks')")
-    parser.add_argument("-m", "--model", default=default_model, help=f"LLM model to use. Available: {', '.join(available_models) if available_models else 'None'}")
-    parser.add_argument("-t", "--threads", type=int, default=4, help="Number of concurrent scraping/search threads")
-    parser.add_argument("--max-results", type=int, default=50, help="Maximum raw search results to consider")
-    parser.add_argument("--max-scrape", type=int, default=10, help="Maximum filtered results to scrape for content")
+    return f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<title>Dcrawler Links – {query}</title>
+<style>
+  body{{font-family:system-ui;background:#0d1117;color:#c9d1d9;padding:2rem}}
+  h1{{color:#58a6ff;margin-bottom:.5rem}} p{{color:#8b949e;margin-bottom:1.5rem}}
+  table{{width:100%;border-collapse:collapse;font-size:.85rem}}
+  th{{background:#21262d;padding:.5rem .8rem;text-align:left;color:#8b949e}}
+  td{{padding:.4rem .8rem;border-bottom:1px solid #21262d;vertical-align:top}}
+  tr:hover td{{background:#161b22}} a{{color:#58a6ff;text-decoration:none}}
+  a:hover{{text-decoration:underline}} .mono{{font-family:monospace;font-size:.78em;word-break:break-all}}
+</style></head><body>
+<h1>&#128279; Links Report</h1>
+<p>Query: <strong>{query}</strong> &nbsp;|&nbsp; {len(results)} unique links found</p>
+<table><thead><tr><th>#</th><th>Title</th><th>URL</th></tr></thead>
+<tbody>{rows}</tbody></table>
+<p style="margin-top:2rem;color:#484f58;font-size:.78rem">Generated by Dcrawler (raw mode)</p>
+</body></html>"""
 
-    if len(sys.argv) == 1:
-        parser.print_help()
+
+def _raw_content_html(query: str, scraped: dict[str, str]) -> str:
+    cards = ""
+    for url, content in scraped.items():
+        safe_url = url.replace('<', '&lt;')
+        safe_content = content.replace('&', '&amp;').replace('<', '&lt;')
+        cards += f"""
+<div class="card">
+  <div class="url"><a href="{safe_url}" target="_blank">{safe_url}</a></div>
+  <pre>{safe_content[:3000]}{'…' if len(content) > 3000 else ''}</pre>
+</div>"""
+    return f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<title>Dcrawler Content – {query}</title>
+<style>
+  body{{font-family:system-ui;background:#0d1117;color:#c9d1d9;padding:2rem}}
+  h1{{color:#58a6ff;margin-bottom:.5rem}} p{{color:#8b949e;margin-bottom:1.5rem}}
+  .card{{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:1rem 1.2rem;margin-bottom:1.5rem}}
+  .url{{margin-bottom:.6rem;font-size:.82rem}} .url a{{color:#58a6ff;word-break:break-all}}
+  pre{{font-size:.78rem;white-space:pre-wrap;line-height:1.5;color:#c9d1d9;overflow-x:auto}}
+</style></head><body>
+<h1>&#128196; Content Report</h1>
+<p>Query: <strong>{query}</strong> &nbsp;|&nbsp; {len(scraped)} pages scraped</p>
+{cards}
+<p style="margin-top:2rem;color:#484f58;font-size:.78rem">Generated by Dcrawler (raw mode)</p>
+</body></html>"""
+
+
+def _apply_tags_notes(sid: Optional[str], args) -> None:
+    """Save optional tags and notes to an open session."""
+    if not sid:
+        return
+    tags  = getattr(args, "tag", None) or ""
+    notes = getattr(args, "note", None) or ""
+    if tags or notes:
+        update_session(sid, tags=tags, notes=notes)
+
+
+def run_raw_mode(args):
+    """No-LLM mode: search → scrape → save organised links + content pages."""
+    print(f"[*] Mode: RAW (no LLM)  |  Query: '{args.query}'")
+
+    sid = None if args.no_save else new_session(args.query, "none", "raw")
+    if sid:
+        print(f"[*] Session ID: {sid}")
+
+    # 1. Search
+    print("[*] Searching dark web (Tor required)...")
+    results = get_search_results(args.query, max_workers=args.threads)
+    print(f"[*] Found {len(results)} unique links.")
+
+    if not results:
+        print("[!] No results found. Check your Tor connection or try a different query.")
+        return
+
+    if len(results) > args.max_results:
+        results = results[:args.max_results]
+
+    if sid:
+        save_results(sid, results)
+        update_session(sid, refined_q=args.query, result_count=len(results))
+
+    # 2. Print links table
+    print(f"\n{'─'*60}")
+    print(f"  LINKS FOUND ({len(results)})")
+    print(f"{'─'*60}")
+    for i, r in enumerate(results, 1):
+        title = r.get("title", "").strip() or "(no title)"
+        print(f"  [{i:>3}] {title[:55]}")
+        print(f"        {r.get('link','')}")
+    print(f"{'─'*60}\n")
+
+    # 3. Scrape (up to max-scrape)
+    to_scrape = results[:args.max_scrape]
+    print(f"[*] Scraping content from {len(to_scrape)} pages...")
+    scraped = scrape_multiple(to_scrape, max_workers=args.threads)
+    print(f"[*] Successfully scraped {len(scraped)} pages.")
+
+    if sid:
+        save_scraped_content(sid, scraped)
+
+    # 3b. Extract IOCs from scraped content
+    iocs = []
+    if scraped and not getattr(args, "no_ioc", False):
+        print("[*] Extracting IOCs from scraped content...")
+        iocs = extract_iocs(scraped)
+        if iocs:
+            from storage import save_artifacts
+            print(f"[*] Found {len(iocs)} IOCs ({len({i['kind'] for i in iocs})} types).")
+            if sid:
+                save_artifacts(sid, iocs)
+        else:
+            print("[*] No IOCs extracted.")
+
+    # 3c. Threat score
+    all_text = " ".join(scraped.values())
+    tscore = calculate_threat_score(len(iocs), all_text, len(results), len(scraped))
+    tlabel = score_label(tscore)
+    print(f"[*] Threat Score: {tscore}/100  [{tlabel}]")
+
+    if sid:
+        update_session(sid, scrape_count=len(scraped), finished=True,
+                       threat_score=tscore,
+                       summary=f"Raw mode: {len(results)} links, {len(scraped)} scraped, {len(iocs)} IOCs, threat={tlabel}.")
+        _apply_tags_notes(sid, args)
+        log_event("SESSION_COMPLETE", sid, {"mode": "raw", "scraped": len(scraped), "iocs": len(iocs), "threat_score": tscore})
+
+    # 4. Print content
+    if scraped:
+        print(f"\n{'─'*60}")
+        print(f"  SCRAPED CONTENT ({len(scraped)} pages)")
+        print(f"{'─'*60}")
+        for url, content in scraped.items():
+            print(f"\n  URL: {url}")
+            print(f"  {'─'*56}")
+            print(f"  {content[:800].strip()}")
+            if len(content) > 800:
+                print(f"  ... [{len(content)-800} more chars]")
+
+    # 5. Save reports
+    if args.report == "none":
+        return
+
+    REPORTS_DIR.mkdir(exist_ok=True)
+    tag = sid or "raw"
+
+    if args.report in ("txt", "both"):
+        links_txt  = REPORTS_DIR / f"links_{tag}.txt"
+        content_txt = REPORTS_DIR / f"content_{tag}.txt"
+        links_txt.write_text(_raw_links_report(args.query, results), encoding="utf-8")
+        content_txt.write_text(_raw_content_report(args.query, scraped), encoding="utf-8")
+        print(f"\n[*] Links report  → {links_txt}")
+        print(f"[*] Content report → {content_txt}")
+
+    if args.report in ("html", "both"):
+        links_html   = REPORTS_DIR / f"links_{tag}.html"
+        content_html = REPORTS_DIR / f"content_{tag}.html"
+        links_html.write_text(_raw_links_html(args.query, results), encoding="utf-8")
+        content_html.write_text(_raw_content_html(args.query, scraped), encoding="utf-8")
+        print(f"[*] Links HTML     → {links_html}")
+        print(f"[*] Content HTML   → {content_html}")
+
+    print("\n[*] Raw investigation complete.")
+    if sid:
+        print(f"[*] View in dashboard: python dashboard.py  →  http://127.0.0.1:5000/session/{sid}")
+
+
+# ── LLM mode ─────────────────────────────────────────────────────────────────
+
+def run_llm_mode(args):
+    """Full LLM mode: refine → search → filter → scrape → summarise."""
+    try:
+        from llm import get_llm, refine_query, filter_results, generate_summary, PRESET_PROMPTS
+        from llm_utils import get_model_choices
+    except ImportError as e:
+        print(f"[!] LLM dependencies missing: {e}")
         sys.exit(1)
 
-    args = parser.parse_args()
-
-    if not args.model:
-        print("Error: No LLM models available. Please check your .env file and API keys.")
+    available_models = get_model_choices()
+    model = args.model
+    if not model:
+        model = "gpt-4.1" if "gpt-4.1" in available_models else (available_models[0] if available_models else None)
+    if not model:
+        print("[!] No LLM models available. Set API keys in .env or use --no-llm for raw mode.")
         sys.exit(1)
 
-    print(f"[*] Starting investigation for: '{args.query}'")
-    print(f"[*] Using model: {args.model}")
+    print(f"[*] Mode: LLM  |  Model: {model}  |  Preset: {args.preset}")
+    print(f"[*] Query: '{args.query}'")
+
+    sid = None if args.no_save else new_session(args.query, model, args.preset)
+    if sid:
+        print(f"[*] Session ID: {sid}")
 
     try:
-        # 1. Initialize LLM
-        llm = get_llm(args.model)
+        llm = get_llm(model)
 
-        # 2. Refine Query
-        print("[*] Refining query for dark web search engines...")
-        refined_query = refine_query(llm, args.query)
-        print(f"[*] Refined query: '{refined_query}'")
+        # Refine
+        print("[*] Refining query...")
+        refined = refine_query(llm, args.query)
+        print(f"[*] Refined: '{refined}'")
+        if sid:
+            update_session(sid, refined_q=refined)
 
-        # 3. Search Dark Web
+        # Search
         print("[*] Searching dark web (Tor required)...")
-        results = get_search_results(refined_query, max_workers=args.threads)
+        results = get_search_results(refined, max_workers=args.threads)
         print(f"[*] Found {len(results)} unique results.")
-
         if not results:
-            print("[!] No results found. Try a different query.")
+            print("[!] No results found.")
             return
-
-        # Cap results
         if len(results) > args.max_results:
             results = results[:args.max_results]
+        if sid:
+            save_results(sid, results)
+            update_session(sid, result_count=len(results))
 
-        # 4. Filter Results
-        print("[*] Filtering results using LLM...")
-        filtered = filter_results(llm, refined_query, results)
-        print(f"[*] Filtered down to {len(filtered)} relevant sources.")
-
+        # Filter
+        print("[*] Filtering results with LLM...")
+        filtered = filter_results(llm, refined, results)
+        print(f"[*] Filtered to {len(filtered)} relevant sources.")
         if not filtered:
-            print("[!] LLM filtered out all results. Try a more specific query.")
+            print("[!] LLM filtered out all results.")
             return
-
-        # Cap filtered results
         if len(filtered) > args.max_scrape:
             filtered = filtered[:args.max_scrape]
 
-        # 5. Scrape Content
-        print(f"[*] Scraping content from {len(filtered)} pages...")
-        scraped_content = scrape_multiple(filtered, max_workers=args.threads)
-        print(f"[*] Successfully scraped {len(scraped_content)} pages.")
-
-        if not scraped_content:
-            print("[!] Failed to scrape any content. Check your Tor connection.")
+        # Scrape
+        print(f"[*] Scraping {len(filtered)} pages...")
+        scraped = scrape_multiple(filtered, max_workers=args.threads)
+        print(f"[*] Scraped {len(scraped)} pages.")
+        if not scraped:
+            print("[!] Failed to scrape any content. Check Tor connection.")
             return
+        if sid:
+            save_scraped_content(sid, scraped)
+            update_session(sid, scrape_count=len(scraped))
 
-        # 6. Generate Summary
+        # Extract IOCs
+        iocs = []
+        if not getattr(args, "no_ioc", False):
+            print("[*] Extracting IOCs from scraped content...")
+            iocs = extract_iocs(scraped)
+            if iocs:
+                from storage import save_artifacts
+                print(f"[*] Found {len(iocs)} IOCs ({len({i['kind'] for i in iocs})} types).")
+                if sid:
+                    save_artifacts(sid, iocs)
+            else:
+                print("[*] No IOCs extracted.")
+
+        # Threat score (before summary so it can be shown)
+        all_text = " ".join(scraped.values())
+        tscore = calculate_threat_score(len(iocs), all_text, len(results), len(scraped))
+        tlabel = score_label(tscore)
+        print(f"[*] Threat Score: {tscore}/100  [{tlabel}]")
+
+        # Summarise
         print("[*] Generating intelligence summary...")
-        # Use default 'threat_intel' preset for CLI
-        summary = generate_summary(llm, args.query, scraped_content)
+        summary = generate_summary(llm, args.query, scraped, preset=args.preset)
 
-        print("\n" + "="*60)
-        print("                      INTELLIGENCE FINDINGS")
-        print("="*60)
+        print("\n" + "=" * 60)
+        print("                    INTELLIGENCE FINDINGS")
+        print("=" * 60)
         print(summary)
-        print("="*60)
-        print(f"\n[*] Investigation complete.")
+        print("=" * 60)
+
+        if sid:
+            update_session(sid, summary=summary, finished=True, threat_score=tscore)
+            _apply_tags_notes(sid, args)
+            log_event("SESSION_COMPLETE", sid, {"scrape_count": len(scraped), "iocs": len(iocs), "threat_score": tscore})
+
+        # Reports
+        if args.report != "none" and sid:
+            session = get_session(sid)
+            if args.report in ("txt", "both"):
+                txt  = generate_text_report(session, summary, [], filtered)
+                path = save_text_report(sid, txt)
+                print(f"\n[*] Text report  → {path}")
+            if args.report in ("html", "both"):
+                html = generate_html_report(session, summary, [], filtered)
+                path = save_html_report(sid, html)
+                print(f"[*] HTML report  → {path}")
+
+        print("\n[*] Investigation complete.")
+        if sid:
+            print(f"[*] Dashboard: python dashboard.py  →  http://127.0.0.1:5000/session/{sid}")
 
     except Exception as e:
-        print(f"\n[!] An error occurred: {e}")
+        if sid:
+            log_event("SESSION_ERROR", sid, {"error": str(e)})
+        print(f"\n[!] Error: {e}")
         sys.exit(1)
+
+
+# ── Bulk query mode ───────────────────────────────────────────────────────────
+
+def run_bulk_mode(args):
+    """Read queries from a file and run each one sequentially."""
+    qfile = Path(args.query_file)
+    if not qfile.exists():
+        print(f"[!] Query file not found: {qfile}")
+        sys.exit(1)
+
+    queries = [line.strip() for line in qfile.read_text().splitlines()
+               if line.strip() and not line.startswith("#")]
+    if not queries:
+        print("[!] No queries found in file (non-empty, non-# lines).")
+        sys.exit(1)
+
+    print(f"[*] Bulk mode: {len(queries)} queries from {qfile}")
+    sessions_run = []
+
+    for i, q in enumerate(queries, 1):
+        print(f"\n{'='*60}")
+        print(f"  [{i}/{len(queries)}] Query: {q}")
+        print(f"{'='*60}")
+        args.query = q
+        if args.no_llm:
+            run_raw_mode(args)
+        else:
+            run_llm_mode(args)
+        # Collect the most-recent session
+        recent = list_sessions(limit=1)
+        if recent:
+            sessions_run.append((q, recent[0].get("session_id", ""), recent[0].get("threat_score", 0)))
+
+    print(f"\n{'='*60}")
+    print(f"  BULK SUMMARY  ({len(sessions_run)} sessions)")
+    print(f"{'='*60}")
+    for q, sid, ts in sessions_run:
+        print(f"  [{score_label(ts):8s} {ts:3d}]  {sid}  {q}")
+    print(f"{'='*60}")
+
+
+# ── Export handler ────────────────────────────────────────────────────────────
+
+def run_export(args):
+    """Export one or all sessions to JSON or CSV."""
+    fmt = getattr(args, "format", "json") or "json"
+    sid = getattr(args, "export_session", None)
+
+    if sid == "all":
+        if fmt == "csv":
+            data = export_all_sessions_csv()
+            suffix = ".csv"
+        else:
+            sessions = list_sessions(limit=1000)
+            data = __import__("json").dumps(sessions, indent=2, default=str)
+            suffix = ".json"
+        out = Path(f"dcrawler_export_all{suffix}")
+        out.write_text(data, encoding="utf-8")
+        print(f"[*] Exported all sessions → {out}")
+        return
+
+    # Single session
+    if fmt == "csv":
+        data = export_session_csv(sid)
+        out = Path(f"export_{sid}.csv")
+    else:
+        data = export_session_json(sid)
+        out = Path(f"export_{sid}.json")
+
+    out.write_text(data, encoding="utf-8")
+    print(f"[*] Exported session {sid} → {out}")
+
+
+# ── CLI entry point ───────────────────────────────────────────────────────────
+
+def main():
+    # Lazy-load preset names for help text (won't fail without API keys)
+    try:
+        from llm import PRESET_PROMPTS
+        preset_choices = list(PRESET_PROMPTS.keys())
+    except Exception:
+        preset_choices = ["threat_intel", "ransomware_malware", "personal_identity", "corporate_espionage"]
+
+    parser = argparse.ArgumentParser(
+        description="Dcrawler: AI-Powered Dark Web OSINT Tool",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Modes:
+  --no-llm   No API key needed. Searches dark web, scrapes pages, and saves
+             organised Links + Content reports (two separate files/pages).
+
+  (default)  Full LLM mode. Refines query, filters results, scrapes, and
+             generates an AI intelligence summary. Requires an API key in .env.
+
+Examples:
+  ./entrypoint.sh "ransomware leaks" --no-llm --report both
+  ./entrypoint.sh "ransomware leaks" --preset threat_intel --report both
+  python dcrawler.py --health
+  python dcrawler.py --dashboard
+        """
+    )
+
+    parser.add_argument("query", nargs="?",
+                        help="Dark web search query, e.g. 'ransomware leaks'")
+
+    # Bulk mode
+    parser.add_argument("--query-file", metavar="FILE",
+                        help="File with one query per line — run all queries in bulk")
+
+    # Export
+    parser.add_argument("--export", metavar="SESSION_ID|all", dest="export_session",
+                        help="Export a session (or 'all') to JSON/CSV and exit")
+    parser.add_argument("--format", choices=["json", "csv"], default="json",
+                        help="Export format (default: json)")
+
+    # Tagging & notes
+    parser.add_argument("--tag", metavar="TAGS",
+                        help="Comma-separated tags to attach to this session, e.g. 'apt,leak'")
+    parser.add_argument("--note", metavar="TEXT",
+                        help="Free-text note to attach to this session")
+
+    # Mode
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--no-llm", action="store_true",
+                      help="Raw mode: search + scrape only, no LLM required")
+
+    # LLM options (only meaningful without --no-llm)
+    parser.add_argument("-m", "--model", default=None,
+                        help="LLM model to use (omit to auto-select from .env keys)")
+    parser.add_argument("--preset", default="threat_intel", choices=preset_choices,
+                        help="Analysis preset for LLM summary")
+
+    # Shared options
+    parser.add_argument("-t", "--threads", type=int, default=4,
+                        help="Concurrent scraping/search threads")
+    parser.add_argument("--max-results", type=int, default=50,
+                        help="Max raw search results to collect")
+    parser.add_argument("--max-scrape", type=int, default=10,
+                        help="Max pages to scrape for full content")
+    parser.add_argument("--report", choices=["html", "txt", "both", "none"], default="both",
+                        help="Report format(s) to generate")
+    parser.add_argument("--no-save", action="store_true",
+                        help="Skip saving results to the local database")
+    parser.add_argument("--no-ioc", action="store_true",
+                        help="Skip automatic IOC extraction from scraped content")
+
+    # Utility
+    parser.add_argument("--health", action="store_true",
+                        help="Show system health status and exit")
+    parser.add_argument("--dashboard", action="store_true",
+                        help="Launch the web dashboard and exit")
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(0)
+
+    args = parser.parse_args()
+
+    if args.health:
+        print_health_report()
+        return
+
+    if args.dashboard:
+        import subprocess
+        subprocess.run([sys.executable, str(Path(__file__).parent / "dashboard.py")])
+        return
+
+    if args.export_session:
+        run_export(args)
+        return
+
+    if args.query_file:
+        run_bulk_mode(args)
+        return
+
+    if not args.query:
+        parser.print_help()
+        sys.exit(1)
+
+    if args.no_llm:
+        run_raw_mode(args)
+    else:
+        run_llm_mode(args)
+
 
 if __name__ == "__main__":
     main()

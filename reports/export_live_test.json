@@ -1,0 +1,332 @@
+{
+  "session": {
+    "id": 1,
+    "session_id": "004bf36e7030bc51925e0ba2",
+    "query": "ransomware leak site",
+    "refined_q": "ransomware leak site",
+    "model": "none",
+    "preset": "raw",
+    "result_count": 30,
+    "scrape_count": 5,
+    "summary": "Raw mode: 30 links, 5 scraped, 14 IOCs, threat=HIGH.",
+    "created_at": "2026-05-17T13:58:04.100933+00:00",
+    "finished_at": "2026-05-17T13:58:49.221027+00:00",
+    "tags": "live-test,ransomware",
+    "notes": "Live Tor network test - all features",
+    "threat_score": 62
+  },
+  "results": [
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/about",
+      "title": "About",
+      "content": "About - About - Amnesia About Directory Add Link Last Added Advertise Contact Amnesia The Amnesic Tor Search Engine pgp canary onions donate Amnesia is a Darknet Search Engine that prioritize your anonymity. As an advertising platform, we deliver highly effective campaigns, elevating the Darknet design standards. Amnesia - The Amnesic Tor Search Engine : Your go-to search engine for an anonymous, secure, and fast search experience. We prioritize your anonymity and ensure no tracking of your online activities. http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion Amnesia Directory: Navigate the darknet with confidence through our comprehensive directory, offering a quality-over-quantity collection of onion services. http://amndir7jfxnt5glt2tsevwjlnwdvknttxygubw27ulq5c433en75piyd.onion Advertise with Amnesia Visit our Advertising page Contact Need help or have feedback? Visit our contact page Disclaimer : Our service is not responsible for the liabilities or damages that result from the use of our services. It is solely the end user's responsibility to ensure their own actions abide by their local restrictions/laws. We do not accept ads for child porn and they will be deleted without refund. Donate BTC address: bc1q4qpq4epy04wtp6zlp36s0dcy9ezewhzz4ysgs2 XMR address: 83ksQ2cFdLaWdAbUyDkmuA6KMZX2JJGJraNExMijfXMyXDHfdnKarmUZUBjqpFPiTFf6X5vfyVca19bxetKmpLMdM6XKBYe AD Trending on Amnesia host .onion site without coding bitcoin mixing Ecstasy crystal Digital Den Counterfeit Banknotes for sale PP counterfit atm cards ICE Related Searches No record found. # Directory Marketplaces Fawkes Market UK Only \ud83d\udc8e TORZON MARKET- Safe Market on Darknet \ud83d\udc8e \u2705 THE DARK MARKET \u2605\u2605\u2605\u2605\u2605 SECRET BITCOIN for sale Arcadia Marketplace Scooby Shop \ud83c\udde8\ud83c\udde6 WeTheNorth Market \ud83c\udde8\ud83c\udde6 #1 Darkweb Market In Canada \ud83c\udde8\ud83c\udde6 DRUGS EMPIRE Zion Pharmaceutical Opioids oxycodone Benzos Psychedelics Stimulants Vendor Directories The Hidden Wiki \u2b50\ufe0f \u2b50\ufe0f Dark Reviews \u2013 Reviews and Ratings of Hidden links ...(truncated)",
+      "scraped": 1,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/directory",
+      "title": "Directory",
+      "content": "Directory - Amnesia Directory Directory Search Engine About Add Link Last Added Advertise Contact Index Marketplaces Directories Hacking Porn Cryptocurrency Search Engines Email Services Forums Social Media Hosting Operating Systems Organizations Other AD Onion Services Arcadia Marketplace Secure, anonymous darknet marketplace with verified vendors. Discover hundreds of unique products, buy and sell securely, discreet worldwide shipping. http://arcadia7dymctef4idw4agoluk6ypgezc4wdra3lruxd5um26ockvbad.onion \u2705 THE DARK MARKET \u2605\u2605\u2605\u2605\u2605 THE DARK MARKET is a Secure and Anonymous Marketplace with Multisig Escrow System. Money Transfers, Paypal, Western Union, MoneyGram. Credit Cards, Prepaid Cards, Virtual Cards, VISA, MasterCard, AMEX. Buy Gift Cards, Amazon, GooglePlay. AppStore. Drugs. Hacking. Porn. Documents. Counterfeits and more. Here you can find trusted sellers and buy the most popular products in the Darknet. http://dark3xolguutzr2cn5twjyu6c3db2z3ai3aqyqascml5cdrleh3s2hqd.onion TorNode Uncensored Onion Links Directory. TorNode is one of the most known and well-maintained directories in the Darknet. http://tornode3tnrtzgqwd3vmxdumucddqfd6zk7icu4wzdwxo5c3zn2xqfqd.onion \u25b6 Pathfinder RAT for Android and iOS. \ud83d\udcf2 \ud83c\udd95 Pathfinder RAT (Android/iOS) is Powerful HTTP RAT FUD Backdoor Binder and web-based Application System Surveillance Monitor. HACK ANY SMARTPHONE! Intercept MMS/SMS, WhatsApp, Facebook Messenger, Telegram, Chats. Watch via camera in real-time. Recording calls and audio. Remote camera capture. Upload and download data. Get real-time geo-location. Fully Undetectable. And more... http://pathfndw4o45qz6f62dyatb44ov3aivwo2ielpzzzlgwcpmvhufd7zyd.onion ANONHACKERS - High-end Hacking Services Social media hacking (Facebook, Instagram, Twitter, Snapchat - 0day), WhatsApp RAT, Email hacking, Smartphones hacking SS7 Access (Android, iOS), PC and Web-Server hacking, Change school/university\\\\\\'s grades, Credit Cards dump, Bitcoin Exploiter. #anonhackers http:/...(truncated)",
+      "scraped": 1,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/webmaster",
+      "title": "Add Link",
+      "content": "Add Link - Add Site - Amnesia About Directory Add Link Last Added Advertise Contact Add Onion Service Here you can add your onion service for free. Websites added in this section are limited to 5 keywords, if you want to gain more visibility and increase your site traffic you may want to take a look to our Advertising page. We do not allow child porn content and the link will be deleted. Title Onion Link (without http:// and .onion) Keywords (maximum 5, separated by comma) Description AD Trending on Amnesia hackin instagram account killer poison shop carding hacking market cvv dumps Rindexxx Royal Class Cards swap coins gfdgdf anonimity Related Searches No record found. # Directory Marketplaces \ud83d\udc8e TORZON MARKET- Safe Market on Darknet \ud83d\udc8e \u2705 THE DARK MARKET \u2605\u2605\u2605\u2605\u2605 \ud83c\udde8\ud83c\udde6 WeTheNorth Market \ud83c\udde8\ud83c\udde6 #1 Darkweb Market In Canada \ud83c\udde8\ud83c\udde6 Fawkes Market UK Only SECRET BITCOIN for sale Scooby Shop DRUGS EMPIRE Arcadia Marketplace Zion Pharmaceutical Opioids oxycodone Benzos Psychedelics Stimulants Vendor Directories TorNode Hidden Links - Smart DeepWeb links collection Hidden Hive - Trusted darknet index since 2019 \u2b50\ufe0f \u2b50\ufe0f Dark Reviews \u2013 Reviews and Ratings of Hidden links \u2b50\ufe0f \u2b50\ufe0f Darknet Home World Box The Hidden Wiki Deepweb.net - All what you need in deepweb in one place! Trust Wiki tormarks \u2013 import Tor bookmarks Dark Top - Onion Sites Rating List \u25aa\ufe0fTOR DOG\u25aa\ufe0f\ud83d\udc9c Hacking White Rabbit - Hacking Services \u2261 THE HACKING PROJECT \u2261 Mnemonic Group \u25b6 Pathfinder RAT for Android and iOS. \ud83d\udcf2 \ud83c\udd95 Kevin.SEC \u2705SOCIAL MEDIA HACKERS & HACKING TOOLS \u2b50\u2b50\u2b50\u2b50\u2b50\u2705 Venom Software - Remote Administration Tools FraudGPT [ h4ck3r ] Hacking Services DARK ARMY HACKING GROUP (HACKING SERVICES) ANONHACKERS - High-end Hacking Services Porn ABYSS PORN LoliPorn \ud83d\udd1e XXX \ud83d\udca6 Celebrity Zoom Cryptocurrency CoinSafe Escrow - Secure Transactions \ud83d\udd12 Escrow Inc. \u2014 The Most Trusted Tor Escrow Anonymous Bitcoin Mixer Anonymixer Majestic Bank EscrowLab \ud83e\ude99 CryptoMix \ud83e\ude99 The #1 Blender/Mixer \ud83e\ude99 Anonymity Guaranteed \ud83e\ude99 Coin Wallet Premium Bitcoi...(truncated)",
+      "scraped": 1,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/last-added",
+      "title": "Last Added",
+      "content": "Last Added - Last Added - Amnesia About Directory Add Link Last Added Advertise Contact Last Added \u2014 Showing 50 newest sites of 2636 results. Emily's Links http://emilyjql3meo2jm4w5grzroduf3ukojpnth2duit4jemw55zfnj4x2id.onion Search Engine \u2014 Onion Links Directory Deepsy http://deepsyzjlztdhw75k5ngx2kktci7xxnqafm7f7ooyaaelusebxdlmjad.onion DeepWeb Avant-Garde Motherlode Market http://oowll6mztmy2s6xj2wvlw2tvqhlrrk4goprf4oxflxetpnjjuovb4qqd.onion Motherlode Market is a secure darknet marketplace accepting BTC and XMR. Enjoy escrow protection, low fees, and complete privacy for digital and physical products. Shop confidently, anonymously, and securely. Your safety and privacy are our top ... Motherlode Market http://5bjvhuqvln3xuwinttuzomrnwgfwscjqqa4lnllcxv3kgomb66b2dsyd.onion Motherlode Market is a secure darknet marketplace accepting BTC and XMR. Enjoy escrow protection, low fees, and complete privacy for digital and physical products. Shop confidently, anonymously, and securely. Your safety and privacy are our top ... DarkNet Drug Hub: Cocaine, Edibles, THC, & More \u2013 Here you can buy everything! http://boom22znqoqg2bgfi5fhempmmckf65uqhxepom3q7e7jjeudamcdfmqd.onion Discover the ultimate darknet drug marketplace with premium quality substances like cocaine, MDMA, ketamine, heroin, and more. Fast, secure, and discreet. Explore a wide range of cannabis strains, edibles, vapes, and more. Your one-stop shop for all ... Trusted Hacking http://pjirriquclntl73trj3dgdlipotmzudemdqfknnukx277eboco2b3mqd.onion Facebook Hacking Website Hacking Database Hacking Instagram Hacking Snapchat Hacking Social Media Hacking Android Hacking iPhone Hacking Computer Hacking Email Hacking Malware Development Server Hacking Twitter Hacking Mobile Smartphone ... WormGPT AI - Powered Hacking Tool http://wormgp4c4mvcyeittv5t6iy4tl7u7lx3p2hwmrpqqmiqc6hv5nountyd.onion Yo, check it out, fam! WormGPT's the real deal, straight outta the hacker's playbook. Picture this: it's like a turbo...(truncated)",
+      "scraped": 1,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/advertising",
+      "title": "Advertise",
+      "content": "Advertise - Advertise - Amnesia About Directory Add Link Last Added Advertise Contact Advertise with Amnesia We offer advertising space on Amnesia Search Engine, including Banner Ads, Keyword Ads, and Sidebar Ads. You can also promote your Darknet business on our Directory . We use a bidding system to move the ads up to a higher position. Banner Keywords Sidebar Directory Amnesia Banner Ad Search Engine $110/Month Advertise your Banner on Amnesia and get thousands of new visits everyday! Your banner will appear on the homepage and at the top of every page, including the Directory. Select Campaign Duration 1 Month (30 Days) 3 Months (90 Days) 6 Months (180 Days) 12 Months (360 Days) 24 Months (720 Days) Add Website Onion Link (without http:// and .onion) Banner (468x60px) Upload File We do not accept ads for child porn and they will be deleted without refund. AD Trending on Amnesia buy counterfeit money online carder bitcards prepaid cards 0day exploits \u0433\u0435\u043d\u0435\u0440\u0430\u0442\u043e\u0440 \u043f\u0430\u0440\u043e\u043b\u0456\u0432 painkiller's btc hire a darkweb hacker Related Searches No record found. # Directory Marketplaces Zion Pharmaceutical Opioids oxycodone Benzos Psychedelics Stimulants Vendor Arcadia Marketplace \ud83d\udc8e TORZON MARKET- Safe Market on Darknet \ud83d\udc8e Scooby Shop \ud83c\udde8\ud83c\udde6 WeTheNorth Market \ud83c\udde8\ud83c\udde6 #1 Darkweb Market In Canada \ud83c\udde8\ud83c\udde6 Fawkes Market UK Only DRUGS EMPIRE \u2705 THE DARK MARKET \u2605\u2605\u2605\u2605\u2605 SECRET BITCOIN for sale Directories Hidden Links - Smart DeepWeb links collection \u25aa\ufe0fTOR DOG\u25aa\ufe0f\ud83d\udc9c Deepweb.net - All what you need in deepweb in one place! tormarks \u2013 import Tor bookmarks Dark Top - Onion Sites Rating List Darknet Home Hidden Hive - Trusted darknet index since 2019 The Hidden Wiki TorNode Trust Wiki \u2b50\ufe0f \u2b50\ufe0f Dark Reviews \u2013 Reviews and Ratings of Hidden links \u2b50\ufe0f \u2b50\ufe0f World Box Hacking Venom Software - Remote Administration Tools [ h4ck3r ] Hacking Services White Rabbit - Hacking Services FraudGPT \u25b6 Pathfinder RAT for Android and iOS. \ud83d\udcf2 \ud83c\udd95 \u2705SOCIAL MEDIA HACKERS & HACKING TOOLS \u2b50\u2b50\u2b50\u2b50\u2b50\u2705 Mnemonic Group DARK ARMY HACKING GROUP (HAC...(truncated)",
+      "scraped": 1,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/contact",
+      "title": "Contact",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=0a735",
+      "title": "Zion Pharmaceutical Opioids oxycodone Benzos Psychedelics Stimulants Vendor",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=6e588",
+      "title": "Arcadia Marketplace",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=dcd05",
+      "title": "\ud83c\udde8\ud83c\udde6 WeTheNorth Market \ud83c\udde8\ud83c\udde6 #1 Darkweb Market In Canada \ud83c\udde8\ud83c\udde6",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=04306",
+      "title": "Scooby Shop",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=6ftsp",
+      "title": "\u2705 THE DARK MARKET \u2605\u2605\u2605\u2605\u2605",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=ab1a7",
+      "title": "SECRET BITCOIN for sale",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=e422e",
+      "title": "\ud83d\udc8e TORZON MARKET- Safe Market on Darknet \ud83d\udc8e",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=89a59",
+      "title": "DRUGS EMPIRE",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=f6e1d",
+      "title": "Fawkes Market UK Only",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=03hhv",
+      "title": "TorNode",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=28efb",
+      "title": "World Box",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=daf48",
+      "title": "Deepweb.net - All what you need in deepweb in one place!",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=a0790",
+      "title": "tormarks \u2013 import Tor bookmarks",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=2dad4",
+      "title": "\u2b50\ufe0f \u2b50\ufe0f Dark Reviews \u2013 Reviews and Ratings of Hidden links \u2b50\ufe0f \u2b50\ufe0f",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=62d32",
+      "title": "Hidden Links - Smart DeepWeb links collection",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=f05f7",
+      "title": "Darknet Home",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=c2f64",
+      "title": "Dark Top - Onion Sites Rating List",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=e54d3",
+      "title": "The Hidden Wiki",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=d6c3e",
+      "title": "Trust Wiki",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=bef2e",
+      "title": "Hidden Hive - Trusted darknet index since 2019",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=00bf6",
+      "title": "\u25aa\ufe0fTOR DOG\u25aa\ufe0f\ud83d\udc9c",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=9j3xs",
+      "title": "\u25b6 Pathfinder RAT for Android and iOS. \ud83d\udcf2 \ud83c\udd95",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=11162",
+      "title": "DARK ARMY HACKING GROUP (HACKING SERVICES)",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    },
+    {
+      "url": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/t?ad=directory&k=267eb",
+      "title": "Venom Software - Remote Administration Tools",
+      "content": null,
+      "scraped": 0,
+      "created_at": "2026-05-17T13:58:41.444010+00:00"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "bitcoin",
+      "value": "bc1q4qpq4epy04wtp6zlp36s0dcy9ezewhzz4ysgs2",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] ads for child porn and they will be deleted without refund. Donate BTC address: bc1q4qpq4epy04wtp6zlp36s0dcy9ezewhzz4ysgs2 XMR address: 83ksQ2cFdLaWdAbUyDkmuA6KMZX2JJGJraNExMijfXMyXDHfdnKarmUZUBjqpFPiTF",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] We prioritize your anonymity and ensure no tracking of your online activities. http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion Amnesia Directory: Navigate the darknet with confidence through our comprehensi",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://amndir7jfxnt5glt2tsevwjlnwdvknttxygubw27ulq5c433en75piyd.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] nsive directory, offering a quality-over-quantity collection of onion services. http://amndir7jfxnt5glt2tsevwjlnwdvknttxygubw27ulq5c433en75piyd.onion Advertise with Amnesia Visit our Advertising page Contact Need help or have fee",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://emilyjql3meo2jm4w5grzroduf3ukojpnth2duit4jemw55zfnj4x2id.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] ise Contact Last Added \u2014 Showing 50 newest sites of 2636 results. Emily's Links http://emilyjql3meo2jm4w5grzroduf3ukojpnth2duit4jemw55zfnj4x2id.onion Search Engine \u2014 Onion Links Directory Deepsy http://deepsyzjlztdhw75k5ngx2kktci",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://deepsyzjlztdhw75k5ngx2kktci7xxnqafm7f7ooyaaelusebxdlmjad.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] kojpnth2duit4jemw55zfnj4x2id.onion Search Engine \u2014 Onion Links Directory Deepsy http://deepsyzjlztdhw75k5ngx2kktci7xxnqafm7f7ooyaaelusebxdlmjad.onion DeepWeb Avant-Garde Motherlode Market http://oowll6mztmy2s6xj2wvlw2tvqhlrrk4gop",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://oowll6mztmy2s6xj2wvlw2tvqhlrrk4goprf4oxflxetpnjjuovb4qqd.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] 2kktci7xxnqafm7f7ooyaaelusebxdlmjad.onion DeepWeb Avant-Garde Motherlode Market http://oowll6mztmy2s6xj2wvlw2tvqhlrrk4goprf4oxflxetpnjjuovb4qqd.onion Motherlode Market is a secure darknet marketplace accepting BTC and XMR. Enjoy",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://5bjvhuqvln3xuwinttuzomrnwgfwscjqqa4lnllcxv3kgomb66b2dsyd.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] mously, and securely. Your safety and privacy are our top ... Motherlode Market http://5bjvhuqvln3xuwinttuzomrnwgfwscjqqa4lnllcxv3kgomb66b2dsyd.onion Motherlode Market is a secure darknet marketplace accepting BTC and XMR. Enjoy",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://boom22znqoqg2bgfi5fhempmmckf65uqhxepom3q7e7jjeudamcdfmqd.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] DarkNet Drug Hub: Cocaine, Edibles, THC, & More \u2013 Here you can buy everything! http://boom22znqoqg2bgfi5fhempmmckf65uqhxepom3q7e7jjeudamcdfmqd.onion Discover the ultimate darknet drug marketplace with premium quality substances",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://pjirriquclntl73trj3dgdlipotmzudemdqfknnukx277eboco2b3mqd.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] rains, edibles, vapes, and more. Your one-stop shop for all ... Trusted Hacking http://pjirriquclntl73trj3dgdlipotmzudemdqfknnukx277eboco2b3mqd.onion Facebook Hacking Website Hacking Database Hacking Instagram Hacking Snapchat Ha",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://wormgp4c4mvcyeittv5t6iy4tl7u7lx3p2hwmrpqqmiqc6hv5nountyd.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] Hacking Twitter Hacking Mobile Smartphone ... WormGPT AI - Powered Hacking Tool http://wormgp4c4mvcyeittv5t6iy4tl7u7lx3p2hwmrpqqmiqc6hv5nountyd.onion Yo, check it out, fam! WormGPT's the real deal, straight outta the hacker's pla",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://arcadia7dymctef4idw4agoluk6ypgezc4wdra3lruxd5um26ockvbad.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] undreds of unique products, buy and sell securely, discreet worldwide shipping. http://arcadia7dymctef4idw4agoluk6ypgezc4wdra3lruxd5um26ockvbad.onion \u2705 THE DARK MARKET \u2605\u2605\u2605\u2605\u2605 THE DARK MARKET is a Secure and Anonymous Marketplace w",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://dark3xolguutzr2cn5twjyu6c3db2z3ai3aqyqascml5cdrleh3s2hqd.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] you can find trusted sellers and buy the most popular products in the Darknet. http://dark3xolguutzr2cn5twjyu6c3db2z3ai3aqyqascml5cdrleh3s2hqd.onion TorNode Uncensored Onion Links Directory. TorNode is one of the most known and",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://tornode3tnrtzgqwd3vmxdumucddqfd6zk7icu4wzdwxo5c3zn2xqfqd.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] orNode is one of the most known and well-maintained directories in the Darknet. http://tornode3tnrtzgqwd3vmxdumucddqfd6zk7icu4wzdwxo5c3zn2xqfqd.onion \u25b6 Pathfinder RAT for Android and iOS. \ud83d\udcf2 \ud83c\udd95 Pathfinder RAT (Android/iOS) is Power",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    },
+    {
+      "kind": "onion_url",
+      "value": "http://pathfndw4o45qz6f62dyatb44ov3aivwo2ielpzzzlgwcpmvhufd7zyd.onion",
+      "context": "[src: http://amnesia7u5odx5xbwtpnqk3edybgud5bmiagu75bnqx2crntw5kry7ad.onion/] and download data. Get real-time geo-location. Fully Undetectable. And more... http://pathfndw4o45qz6f62dyatb44ov3aivwo2ielpzzzlgwcpmvhufd7zyd.onion ANONHACKERS - High-end Hacking Services Social media hacking (Facebook, Instagr",
+      "created_at": "2026-05-17T13:58:49.218219+00:00"
+    }
+  ],
+  "audit_log": [
+    {
+      "id": 2,
+      "event_type": "SESSION_COMPLETE",
+      "session_id": "004bf36e7030bc51925e0ba2",
+      "details": "{\"mode\": \"raw\", \"scraped\": 5, \"iocs\": 14, \"threat_score\": 62}",
+      "created_at": "2026-05-17T13:58:49.225116+00:00"
+    },
+    {
+      "id": 1,
+      "event_type": "SESSION_START",
+      "session_id": "004bf36e7030bc51925e0ba2",
+      "details": "{\"query\": \"ransomware leak site\", \"model\": \"none\", \"preset\": \"raw\"}",
+      "created_at": "2026-05-17T13:58:04.145950+00:00"
+    }
+  ]
+}
